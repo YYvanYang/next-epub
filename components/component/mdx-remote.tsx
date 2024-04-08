@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { MDXRemote, type MDXRemoteProps } from "next-mdx-remote/rsc";
 import { AppOnly } from "~/components/component/app-only";
 import { PagesOnly } from "~/components/component/pages-only";
@@ -18,9 +19,11 @@ type CustomMDXProps = MDXRemoteProps & {
 
 export function CustomMDX(props: CustomMDXProps) {
   return (
-    <MDXRemote
-      {...props}
-      components={{ ...components, ...(props.components || {}) }}
-    />
+    <Suspense fallback={<>Loading...</>}>
+      <MDXRemote
+        {...props}
+        components={{ ...components, ...(props.components || {}) }}
+      />
+    </Suspense>
   );
 }
