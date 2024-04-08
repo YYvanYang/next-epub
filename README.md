@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+### Writing MDX
 
-## Getting Started
+The docs are written in [MDX](https://mdxjs.com/), a markdown format that supports JSX syntax. This allows us to embed React components in the docs. See the [GitHub Markdown Guide](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) for a quick overview of markdown syntax.
 
-First, run the development server:
+### VSCode
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+#### Previewing Changes Locally
+
+VSCode has a built-in markdown previewer that you can use to see your edits locally. To enable the previewer for MDX files, you'll need to add a configuration option to your user settings.
+
+Open the command palette (`⌘ + ⇧ + P` on Mac or `Ctrl + Shift + P` on Windows) and search from `Preferences: Open User Settings (JSON)`.
+
+Then, add the following line to your `settings.json` file:
+
+```json filename="settings.json"
+{
+  "files.associations": {
+    "*.mdx": "markdown"
+  }
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Next, open the command palette again, and search for `Markdown: Preview File` or `Markdown: Open Preview to the Side`. This will open a preview window where you can see your formatted changes.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+#### Extensions
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+We also recommend the following extensions for VSCode users:
 
-## Learn More
+- [MDX](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx): Intellisense and syntax highlighting for MDX.
+- [Grammarly](https://marketplace.visualstudio.com/items?itemName=znck.grammarly): Grammar and spell checker.
+- [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode): Format MDX files on save.
 
-To learn more about Next.js, take a look at the following resources:
+### MDX Config
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Create a `mdx-components.tsx` file at the root of your application (`src/` or the parent folder of `app/`):
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+> **Good to know**: `mdx-components.tsx` is required to use MDX with App Router and will not work without it.
 
-## Deploy on Vercel
+```tsx filename="mdx-components.tsx"
+import type { MDXComponents } from "mdx/types";
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+export function useMDXComponents(components: MDXComponents): MDXComponents {
+  return {
+    ...components,
+  };
+}
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [Markdown and MDX](https://nextjs.org/docs/app/building-your-application/configuring/mdx): Markdown and MDX
