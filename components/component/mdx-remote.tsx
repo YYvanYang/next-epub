@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { MDXRemote, type MDXRemoteProps } from "next-mdx-remote/rsc";
 import { AppOnly } from "~/components/component/app-only";
 import { PagesOnly } from "~/components/component/pages-only";
+import { Code } from "./code";
 
 const components = {
   h1: (props: React.HTMLProps<HTMLHeadingElement>) => (
@@ -11,6 +12,7 @@ const components = {
   ),
   AppOnly: AppOnly,
   PagesOnly: PagesOnly,
+  code: Code,
 };
 
 type CustomMDXProps = MDXRemoteProps & {
